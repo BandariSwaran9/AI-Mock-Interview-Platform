@@ -1,9 +1,6 @@
 ﻿from pymongo import MongoClient
-from dotenv import load_dotenv
-import os
-load_dotenv()
-MONGO_URI = os.getenv("MONGO_URI")
-DATABASE_NAME = os.getenv("DATABASE_NAME")
+MONGO_URI = "mongodb+srv://bandariswaran77_db_user:e9xZY0NovNde9d4W@ai-mock-interview.5woxz9n.mongodb.net/?appName=AI-Mock-Interview"
+DATABASE_NAME = "ai_mock_interview"
 client = MongoClient(MONGO_URI)
 db = client[DATABASE_NAME]
 def get_database():
