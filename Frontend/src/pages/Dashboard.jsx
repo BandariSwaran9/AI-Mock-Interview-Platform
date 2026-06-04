@@ -17,9 +17,19 @@ function Dashboard() {
         Welcome, {user?.name}!
       </h1>
       <p className="text-gray-400 text-xl mb-8">Your AI Mock Interview Dashboard</p>
-      <button className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-lg">
-        Start Interview
-      </button>
+      <div className="flex gap-4">
+        <button
+          onClick={() => navigate('/resume-upload')}
+          className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg text-lg"
+        >
+          Upload Resume
+        </button>
+        <button
+          className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-lg"
+        >
+          Start Interview
+        </button>
+      </div>
     </div>
   )
 }
