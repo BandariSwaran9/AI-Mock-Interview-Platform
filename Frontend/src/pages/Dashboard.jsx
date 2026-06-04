@@ -25,6 +25,7 @@ function Dashboard() {
           Upload Resume
         </button>
         <button
+          onClick={() => navigate('/interview')}
           className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-lg"
         >
           Start Interview
