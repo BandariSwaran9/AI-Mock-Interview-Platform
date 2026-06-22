@@ -1,6 +1,7 @@
 ﻿from google import genai
 import os
 import json
+import time
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 client = genai.Client(api_key=GEMINI_API_KEY)
 def generate_questions(resume_text: str):
@@ -28,7 +29,7 @@ def generate_questions(resume_text: str):
     return questions
 def evaluate_answers(answers):
     results = []
-    for item in answers:
+    for index, item in enumerate(answers):
         prompt = f"""
         You are an expert interviewer evaluating a candidate's answer.
         Question: {item.question}
@@ -37,10 +38,10 @@ def evaluate_answers(answers):
         {{"score": 7, "feedback": "Good explanation but missing key concepts."}}
         Only return the JSON, nothing else.
         """
-        response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
-        text = response.text.strip()
-        text = text.replace("`json", "").replace("`", "").strip()
         try:
+            response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+            text = response.text.strip()
+            text = text.replace("", "").replace("", "").strip()
             data = json.loads(text)
             results.append({
                 "question": item.question,
@@ -48,11 +49,13 @@ def evaluate_answers(answers):
                 "score": data.get("score", 5),
                 "feedback": data.get("feedback", "Good attempt.")
             })
-        except:
+        except Exception as e:
             results.append({
                 "question": item.question,
                 "answer": item.answer,
                 "score": 5,
-                "feedback": "Could not evaluate. Please try again."
+                "feedback": "Could not evaluate this answer. Quota limit reached, please try again in a minute."
             })
+        if index < len(answers) - 1:
+            time.sleep(13)
     return results
