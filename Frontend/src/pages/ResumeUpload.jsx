@@ -20,7 +20,7 @@ function ResumeUpload() {
     formData.append('file', file)
     try {
       const res = await axios.post(
-        'http://127.0.0.1:8000/resume/upload?email=' + user.email,
+        'https://ai-mock-interview-platform-j6yx.onrender.com/resume/upload?email=' + user.email,
         formData,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       )

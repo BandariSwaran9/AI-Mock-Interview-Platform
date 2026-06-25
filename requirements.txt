@@ -1,8 +1,0 @@
-﻿fastapi
-uvicorn
-pymongo
-python-dotenv
-python-multipart
-PyPDF2
-google-genai
-pydantic

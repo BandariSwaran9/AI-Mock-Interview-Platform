@@ -10,7 +10,7 @@ function Register() {
   }
   const handleSubmit = async () => {
     try {
-      const res = await axios.post('http://127.0.0.1:8000/auth/register', form)
+      const res = await axios.post('https://ai-mock-interview-platform-j6yx.onrender.com/auth/register', form)
       if (res.data.success) {
         setMessage('Account created! Redirecting to login...')
         setTimeout(() => navigate('/login'), 2000)

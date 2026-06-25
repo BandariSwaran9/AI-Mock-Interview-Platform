@@ -13,7 +13,7 @@ function Interview() {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const res = await axios.get('http://127.0.0.1:8000/interview/questions?email=' + user.email)
+        const res = await axios.get('https://ai-mock-interview-platform-j6yx.onrender.com/interview/questions?email=' + user.email)
         if (res.data.success) {
           setQuestions(res.data.questions)
         }

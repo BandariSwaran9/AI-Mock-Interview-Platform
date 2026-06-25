@@ -10,7 +10,7 @@ function Login() {
   }
   const handleSubmit = async () => {
     try {
-      const res = await axios.post('http://127.0.0.1:8000/auth/login', form)
+      const res = await axios.post('https://ai-mock-interview-platform-j6yx.onrender.com/auth/login', form)
       if (res.data.success) {
         localStorage.setItem('user', JSON.stringify({ name: res.data.name, email: form.email }))
         setMessage('Login successful! Redirecting...')

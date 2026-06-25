@@ -10,7 +10,7 @@ function Results() {
     const evaluate = async () => {
       const answers = JSON.parse(localStorage.getItem('interview_answers'))
       try {
-        const res = await axios.post('http://127.0.0.1:8000/interview/evaluate', {
+        const res = await axios.post('https://ai-mock-interview-platform-j6yx.onrender.com/interview/evaluate', {
           email: user.email,
           answers: answers
         })
