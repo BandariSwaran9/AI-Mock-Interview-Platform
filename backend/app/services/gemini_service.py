@@ -1,13 +1,24 @@
 ﻿from google import genai
+from google.genai import types
 import os
 import json
 import time
+import random
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 client = genai.Client(api_key=GEMINI_API_KEY)
 def generate_questions(resume_text: str):
+    angles = [
+        "Focus more on technical depth and implementation details.",
+        "Focus more on problem-solving approach and decision-making.",
+        "Focus more on real-world impact and practical applications.",
+        "Focus more on challenges faced and how they were overcome.",
+        "Focus more on collaboration, learning, and growth from the experience."
+    ]
+    chosen_angle = random.choice(angles)
     prompt = f"""
     You are an expert technical interviewer.
     Based on the following resume, generate 5 interview questions.
+    {chosen_angle}
     Resume:
     {resume_text}
     Generate exactly 5 questions in this format:
@@ -18,7 +29,11 @@ def generate_questions(resume_text: str):
     5. Question five
     Only return the questions, nothing else.
     """
-    response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt,
+        config=types.GenerateContentConfig(temperature=1.0)
+    )
     text = response.text
     questions = []
     for line in text.strip().split("\n"):
